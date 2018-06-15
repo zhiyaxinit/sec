@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+		ul {
+			list-style: none;
+		}
+			#miaov {
+				width: 300px;
+				background: red;
+				position: absolute;
+				color: #fff;
+				left: 0;
+				top: 0;
+				display: none;
+			}
+
+			#miaov ul {
+				background: green;
+				padding: 30px;
+			}
+
+			#miaov ul li {
+				background: blue;
+				padding: 30px;
+			}
+
+
+		</style>
+		<script type="text/miaov">
+
+			事件流描述的是从页面中接收事件的顺序。
+
+			事件发生时会在元素节点与根节点之间按照特定的顺序传播，路径所经过的所有节点都会收到该事件，这个传播过程即DOM事件流。
+
+			事件是对应的事件 click触发沿途经过的click事件 mouseover触发沿途经过的mouseover事件
+
+			 事件流的三个阶段
+				事件捕获阶段、处于目标阶段、事件冒泡阶段
+
+				事件捕获阶段：事件从最不具体的节点到具体触发事件节点的过程
+					从window 到触发事件的元素
+
+				处于目标阶段：具体触发事件节点触发事件
+				事件冒泡阶段：事件从具体触发事件节点到最不具体的节点的过程
+					从触发事件的元素 到window
+			
+		</script>
+		<script>
+			
+		</script>
+	</head>
+
+	<body style="height: 3000px;">
+
+		<div id="miaov">
+			<ul>
+				<li>新建</li>
+				<li>刷新</li>
+				<li>删除</li>
+			</ul>
+		</div>
+		<script>
+			// 当右击页面时候，菜单出现会触发oncontextmenu事件，那么通过触发这个oncontextmenu事件，用来自定义右键菜单。
+
+			// 点击事件onclick 鼠标的左中右键都触发的是onclick
+
+			/*
+				鼠标位置
+					clientX clientY 相对可视区来获取值的
+
+					pageX pageY 鼠标相对页面来获取值
+
+				页面的元素是先对页面定位的
+
+			*/
+
+			document.onclick = function (e){
+				miaov.style.display = 'none';
+				console.log('点击了');	
+				console.log(e.which);  
+				// 1. 左键 2 中键 3 右键
+				e.preventDefault();
+			}
+
+			document.oncontextmenu = function (e){
+				miaov.style.display = 'block';
+				miaov.style.left = e.pageX+ 'px';
+				miaov.style.top = e.pageY+ 'px';
+
+				e.preventDefault();	
+			}
+
+		</script>
+	</body>
+</html>
